@@ -168,8 +168,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< Updated upstream
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+=======
+        //agregamos esta linea llamar libreria que genera pdf
+        Barryvdh\DomPDF\ServiceProvider::class,
+>>>>>>> Stashed changes
     ])->toArray(),
 
     /*
