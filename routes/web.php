@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TirillaController;
+use App\Http\Livewire\Tirilla\Tirillalw;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/consultar-tirilla', [Tirillalw::class,'consultarTirilla']);
