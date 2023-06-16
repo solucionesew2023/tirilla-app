@@ -431,7 +431,7 @@
         @endif
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 ">
-            
+
             @if (session()->has('status'))
                 {{-- comprueba si existe el valor en sesión --}}
                 <br>
@@ -439,12 +439,12 @@
                     <p> {{ session('status') }} </p> {{-- devuelve e imprime el valor de la sesión --}}
                 </div>
 
-                {!! session()->forget('status') !!} {{-- borrar el error de sesión --}}
+              
             @endif
             <div class="mt-0 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-3 bg-gay-50">
 
-                    
+
 
                     <div class="max-w-full p-6">
                         <div class="content-center p-5">
@@ -461,7 +461,7 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
 
@@ -480,7 +480,7 @@
         </div>
     </div>
 
-    
+
 
     <!--Modla tirilla de pago-->
 
@@ -500,15 +500,15 @@
                 <button onclick="closeModal('modalT')">x</button>
             </div>
             @livewire('tirilla.tirillalw')
-            
+
         </div>
     </div>
     <!--fin modal tirilla de pago-->
 
 
-    
 
-    
+
+
 
     <script type="text/javascript">
         window.openModal = function(modalId) {

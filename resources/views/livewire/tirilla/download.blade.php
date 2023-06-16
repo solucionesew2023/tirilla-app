@@ -26,6 +26,7 @@
                     <th>Id</th>
                     <th>Codigo</th>
                     <th>Nombres</th>
+                    <th>Documento</th>
                 </tr>
             </thead>
 
@@ -35,6 +36,7 @@
                     <td>{{ $tir->id }}</td>
                     <td>{{ $tir->codigo }}</td>
                     <td>{{ $tir->nombre }}</td>
+                    <td>{{ $tir->personalid }}</td>
                 </tr>
                 @empty
 

@@ -19,7 +19,7 @@ class Tirillalw extends Component
     public function mount(){
         $this->mesActual = date("m");
     }
-/*
+
     public function updatedanio(){
         if($this->anio == 1){
             $this->anioSel = date('Y');
@@ -27,7 +27,7 @@ class Tirillalw extends Component
             $anio = date('Y');
             $this->anioSel = date("Y",strtotime($anio."- 1 year"));
         }
-    }*/
+    }
 
     public function render()
     {
@@ -35,24 +35,20 @@ class Tirillalw extends Component
     }
 
 
-    public function index(){
-
-        $tirilla = Tirillatns::all();
-
-        return view('livewire.tirilla.index', compact('tirilla'));
-
-    }
 
 
     public function consultarTirilla(){
 
-$rutas=[];
-       
-foreach($this->listaMes as $m){
+//foreach($this->listaMes as $m){
 
- $tirilla = Tirillatns::all();
+     //$tirilla = Tirillatns::all();
 
- //view()->share('livewire.tirilla.download', $tirilla);
+    $tirilla = Tirillatns::where('personalid', $this->cedula)
+    ->where('mes',1)
+    ->where('ano',$this->anioSel)
+    ->get();
+
+
 
  $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
@@ -71,24 +67,20 @@ foreach($this->listaMes as $m){
 
 
 
- Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
- $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
- $mail->to($this->email);
- $mail->attachData($pdf->output(), 'test.pdf');
+    Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
+    $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
+    $mail->to($this->email);
+    $mail->attachData($pdf->output(), 'mensaje.pdf');
  });
 
 
-}
-
-
-
-
+//}
 
 return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
 
 
 
-       return $pdf->stream('tirilla.pdf');
+       //return $pdf->stream('tirilla.pdf');
 
     }
 

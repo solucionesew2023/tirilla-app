@@ -45,7 +45,7 @@
                         <legend>Seleccione el Mes</legend>
                         <div class="grid grid-cols-3 gap-3">
                             {{-- @foreach ($config->category as $value) --}}
-                            
+
                             @if(1 < $mesActual)
                             <label><input wire:model='listaMes' type="checkbox" value="1" /> Enero</label>
                             @endif
@@ -131,7 +131,7 @@
                 onclick="closeModal('modalT')">
                 Cerrar
             </button>
-            <button wire:click="consultarTirilla()"
+            <button wire:click.prevent="consultarTirilla()"
                 class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-700 transition">
                 Descargar Tirilla
             </button>
