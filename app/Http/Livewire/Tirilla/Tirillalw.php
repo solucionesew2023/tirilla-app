@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\Tirilla;
 
 use Livewire\Component;
+use App\Mail\TirillaPago;
 use App\Models\Tirillatns;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Mail;
+
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail as Mail;
 
 class Tirillalw extends Component
 {
@@ -18,7 +20,7 @@ class Tirillalw extends Component
         $this->mesActual = date("m");
     }
 /*
-    public function updatedanio(){ 
+    public function updatedanio(){
         if($this->anio == 1){
             $this->anioSel = date('Y');
         }elseif($this->anio == 2) {
@@ -34,7 +36,7 @@ class Tirillalw extends Component
 
 
     public function index(){
-       
+
         $tirilla = Tirillatns::all();
 
         return view('livewire.tirilla.index', compact('tirilla'));
@@ -43,18 +45,52 @@ class Tirillalw extends Component
 
 
     public function consultarTirilla(){
+
+$rutas=[];
        
-        $tirilla = Tirillatns::all();
+foreach($this->listaMes as $m){
 
-       view()->share('livewire.tirilla.download', $tirilla);
+ $tirilla = Tirillatns::all();
 
-        $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
+ //view()->share('livewire.tirilla.download', $tirilla);
 
-        return $pdf->download('tirilla.pdf');
+ $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
-       // return $pdf->stream('tirilla.pdf');
-        
+ // return $pdf->download('tirilla.pdf');
+ //dd($pdf);
+
+ $messageData[] = "HOLA";
+
+ $details = [
+ // 'mes' => implode("-",$this->listaMes).":".$this->anioSel,
+ // 'cedula' => $this->cedula,
+ 'title' => 'Consulta Tirilla de pago',
+ 'body' => 'Este es un correo automatico. Ver anexo',
+
+ ];
+
+
+
+ Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
+ $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
+ $mail->to($this->email);
+ $mail->attachData($pdf->output(), 'test.pdf');
+ });
+
+
+}
+
+
+
+
+
+return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
+
+
+
+       return $pdf->stream('tirilla.pdf');
+
     }
 
-    
+
 }

@@ -25,7 +25,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Codigo</th>
-                    <th>Nombre</th>
+                    <th>Nombres</th>
                 </tr>
             </thead>
 
