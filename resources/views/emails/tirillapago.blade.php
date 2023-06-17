@@ -9,11 +9,7 @@
 
 <body>
     <p class="font-bold">Cordial Saludo.</p>
-    @foreach ($details as $tira)
-    <p>{{$tira->title}}</p>
-    <p>{{$tira->body}}</p>
-    @endforeach
-    
+    <p>Este correo se genero automaticamente. consulte el anexo.</p>
 </body>
 
 </html>

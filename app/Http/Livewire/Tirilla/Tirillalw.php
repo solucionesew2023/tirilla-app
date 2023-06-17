@@ -58,7 +58,7 @@ class Tirillalw extends Component
             }else{
 
                 $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
-
+                
                 $details = [
                 // 'mes' => $mes,
                 // 'cedula' => $this->cedula,
@@ -68,11 +68,10 @@ class Tirillalw extends Component
                 Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
                 $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
                 $mail->to($this->email);
-                $mail->attachData($pdf->output(), 'mensaje.pdf');
-                });
+                $mail->attachData($pdf->output(), $this->cedula.'.pdf');
                 return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
+                });
             }
-            
         }
     }// cierra consultarTirilla
 }// cierra clase

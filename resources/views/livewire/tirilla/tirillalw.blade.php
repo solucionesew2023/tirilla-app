@@ -18,7 +18,7 @@
 
 
                 <p class="font-medium text-slate-500">
-                    @error('movil') <span class="text-red-400 error">El movil es requerido</span> @enderror
+                    @error('movil') <span class="text-red-400 error">El movil es requerido(10 Nùmeros)</span> @enderror
                     <input wire:model.lazy="movil" type="tel" placeholder="Ingrese Movil" required
                         class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 border rounded appearance-none bg-gray-50 border-sky-500 focus:outline-none focus:bg-white">
                         
