@@ -1,4 +1,4 @@
-<div>
+<div>@php var_dump( $listaMes) @endphp
     <!-- Modal tirilla de pago -->
     <form {{-- action="descargar-tirilla" method="POST" --}}>
         <div class="max-h-70 p-8">
@@ -98,6 +98,8 @@
                             <label><input wire:model='listaMes' type="checkbox" value="11" /> Noviembre</label>
                             <label><input wire:model='listaMes' type="checkbox" value="12" /> Diciembre</label>
                             {{-- @endforeach --}}
+
+
                         </div>
                     </fieldset>
                     </p>

@@ -34,28 +34,18 @@ class Tirillalw extends Component
         return view('livewire.tirilla.tirillalw');
     }
 
-
-
-
     public function consultarTirilla(){
 
-//foreach($this->listaMes as $m){
-
-     //$tirilla = Tirillatns::all();
+foreach($this->listaMes as $m){
 
     $tirilla = Tirillatns::where('personalid', $this->cedula)
-    ->where('mes',1)
+    ->where('mes',$m)
     ->where('ano',$this->anioSel)
     ->get();
-
-
-
  $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
  // return $pdf->download('tirilla.pdf');
  //dd($pdf);
-
- $messageData[] = "HOLA";
 
  $details = [
  // 'mes' => implode("-",$this->listaMes).":".$this->anioSel,
@@ -73,16 +63,12 @@ class Tirillalw extends Component
     $mail->attachData($pdf->output(), 'mensaje.pdf');
  });
 
-
-//}
+    }
+// for
 
 return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
 
+    }// cierra funcion principal
 
 
-       //return $pdf->stream('tirilla.pdf');
-
-    }
-
-
-}
+}// cierra clase

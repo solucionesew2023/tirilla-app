@@ -27,6 +27,7 @@
                     <th>Codigo</th>
                     <th>Nombres</th>
                     <th>Documento</th>
+                    <th>Concepto</th>
                 </tr>
             </thead>
 
@@ -37,9 +38,12 @@
                     <td>{{ $tir->codigo }}</td>
                     <td>{{ $tir->nombre }}</td>
                     <td>{{ $tir->personalid }}</td>
+                    <td>{{ $tir->nomconcepto }}</td>
+
+                    
                 </tr>
                 @empty
-
+                <p>Error</p>
                 @endforelse
             </tbody>
         </table>
