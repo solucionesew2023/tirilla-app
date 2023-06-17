@@ -16,6 +16,14 @@ class Tirillalw extends Component
     Public $listaMes = [];
     public $mesActual;
 
+    protected $rules = [
+        'cedula' => 'required|min:6',
+        'email' => 'required|email',
+        'movil' => 'required|min:10 | max:10',
+        'listaMes' => 'required',
+        'anio' => 'required',
+    ];
+
     public function mount(){
         $this->mesActual = date("m");
     }
@@ -34,41 +42,37 @@ class Tirillalw extends Component
         return view('livewire.tirilla.tirillalw');
     }
 
-    public function consultarTirilla(){
+    public function consultarTirilla()
+    {
+        $this->validate();
 
-foreach($this->listaMes as $m){
+        foreach($this->listaMes as $m)
+        {
+            $tirilla = Tirillatns::where('personalid', $this->cedula)
+            ->where('mes',$m)
+            ->where('ano',$this->anioSel)
+            ->get();
 
-    $tirilla = Tirillatns::where('personalid', $this->cedula)
-    ->where('mes',$m)
-    ->where('ano',$this->anioSel)
-    ->get();
- $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
+            if($tirilla->isEmpty()){
+                return redirect('/')->with('status','Usuario no existe');
+            }else{
 
- // return $pdf->download('tirilla.pdf');
- //dd($pdf);
+                $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
- $details = [
- // 'mes' => implode("-",$this->listaMes).":".$this->anioSel,
- // 'cedula' => $this->cedula,
- 'title' => 'Consulta Tirilla de pago',
- 'body' => 'Este es un correo automatico. Ver anexo',
-
- ];
-
-
-
-    Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
-    $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
-    $mail->to($this->email);
-    $mail->attachData($pdf->output(), 'mensaje.pdf');
- });
-
-    }
-// for
-
-return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
-
-    }// cierra funcion principal
-
-
+                $details = [
+                // 'mes' => $mes,
+                // 'cedula' => $this->cedula,
+                'title' => 'Consulta Tirilla de pago',
+                'body' => 'Este es un correo automatico. Ver anexo',
+                ];
+                Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
+                $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
+                $mail->to($this->email);
+                $mail->attachData($pdf->output(), 'mensaje.pdf');
+                });
+                return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
+            }
+            
+        }
+    }// cierra consultarTirilla
 }// cierra clase
