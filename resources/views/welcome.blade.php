@@ -413,17 +413,17 @@
     <!-- component -->
 
     <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-1 sm:pt-0">
+        class="relative flex justify-center min-h-screen py-1 bg-gray-100 items-top dark:bg-gray-900 sm:items-center sm:pt-0">
         @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Panel</a>
+                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline dark:text-gray-500">Panel</a>
                 @else
                     <a href="{{ route('login') }}"
-                        class="ml-4 px-3 py-2 rounded-md text-sm leading-5  text-white font-semibold bg-sky-800 hover:bg-sky-500 hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700 ">Ingresar</a>
+                        class="px-3 py-2 ml-4 text-sm font-semibold leading-5 text-white transition duration-150 ease-in-out rounded-md cursor-pointer bg-sky-800 hover:bg-sky-500 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 ">Ingresar</a>
                     {{--
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline dark:text-gray-500">Registrarse</a>
                         @endif
                         --}}
                 @endauth
@@ -435,13 +435,13 @@
             @if (session()->has('status'))
                 {{-- comprueba si existe el valor en sesión --}}
                 <br>
-                <div class="p-4 bg-orange-400 rounded-sm text-white font-bold">
+                <div class="p-4 font-bold text-white bg-orange-400 rounded-sm">
                     <p> {{ session('status') }} </p> {{-- devuelve e imprime el valor de la sesión --}}
                 </div>
 
               
             @endif
-            <div class="mt-0 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+            <div class="mt-0 overflow-hidden bg-white shadow dark:bg-gray-800 sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-3 bg-gay-50">
 
 
@@ -449,13 +449,13 @@
                     <div class="max-w-full p-6">
                         <div class="content-center p-5">
                             <div class="grid place-items-center">
-                                <img class="cursor-auto" src="img/tirilla_pag.png" href="" onclick="openModal('modalT')"
+                                <img class="cursor-pointer" src="img/tirilla_pag.png" href="" onclick="openModal('modalT')"
                                     alt="Descargar Certificacion laboral" class="hover:cursor-pointer" width="120" />
                             </div>
                         </div>
 
-                        <div class="items-center bg-gray-100 p-5">
-                            <div class="text-center text-sm  font-semibold">
+                        <div class="items-center p-5 bg-gray-100">
+                            <div class="text-sm font-semibold text-center">
                                 DESCARGAR TIRILLA DE PAGO
                             </div>
                         </div>
@@ -466,13 +466,13 @@
             </div>
 
             <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
+                <div class="text-sm text-center text-gray-500 sm:text-left">
                     <div class="flex items-center p2">
                         Prodeho.com.co
                     </div>
                 </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                <div class="ml-4 text-sm text-center text-gray-500 sm:text-right sm:ml-0">
                     Desarrollado por willoo
                 </div>
             </div>
@@ -485,11 +485,11 @@
     <!--Modla tirilla de pago-->
 
     <div id="modalT"
-        class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 modalT">
+        class="fixed inset-0 z-50 hidden w-full h-full px-4 overflow-y-auto bg-gray-900 bg-opacity-60 modalT">
         <div class="relative top-20  mx-auto shadow-xl rounded-md bg-white lg:w-[45%]">
 
             <!-- Modal header -->
-            <div class="flex justify-between items-center bg-sky-400 text-white text-xl rounded-t-md px-8 py-4">
+            <div class="flex items-center justify-between px-8 py-4 text-xl text-white bg-sky-400 rounded-t-md">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"

@@ -10,29 +10,37 @@
             {{-- @csrf --}}
             <div class="grid grid-cols-2 gap-2">
                 <p class="font-medium text-slate-500">
-                    @error('cedula') <span class="text-red-400 error">La cedula es obligatoria</span> @enderror
+                    @error('cedula')
+                        <span class="text-red-400 error">La cedula es obligatoria</span>
+                    @enderror
                     <input wire:model.lazy="cedula" type="number" placeholder="Ingrese la cedula" required
                         class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 border rounded appearance-none bg-gray-50 border-sky-500 focus:outline-none focus:bg-white">
-                        
+
                 </p>
 
 
                 <p class="font-medium text-slate-500">
-                    @error('movil') <span class="text-red-400 error">El movil es requerido(10 Nùmeros)</span> @enderror
+                    @error('movil')
+                        <span class="text-red-400 error">El movil es requerido(10 Nùmeros)</span>
+                    @enderror
                     <input wire:model.lazy="movil" type="tel" placeholder="Ingrese Movil" required
                         class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 border rounded appearance-none bg-gray-50 border-sky-500 focus:outline-none focus:bg-white">
-                        
+
                 </p>
                 {{-- <input type="datetime" name="fecha"  value="{{ date("m-Y");}}"> --}}
             </div>
             <p class="font-medium text-slate-500">
-                @error('email') <span class="text-red-400 error">Debe ingresar un email</span> @enderror
+                @error('email')
+                    <span class="text-red-400 error">Debe ingresar un email</span>
+                @enderror
                 <input wire:model.lazy="email" type="email" placeholder="Ingrese el email" required
                     class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 border rounded appearance-none bg-gray-50 border-sky-500 focus:outline-none focus:bg-white">
-                    
+
             </p>
             <div class="p-2">
-                @error('anio') <span class="text-red-400 error">Debe seccionar un año </span> @enderror
+                @error('anio')
+                    <span class="text-red-400 error">Debe seccionar un año </span>
+                @enderror
                 <fieldset class="p-3 border border-gray-200">
                     <legend>Seleccione el año</legend>
                     <div>
@@ -45,51 +53,53 @@
                     </div>
                 </fieldset>
             </div>
-            
+
             @if ($anio == 1)
                 <div>
-                    @error('listaMes') <span class="text-red-400 error">Debe seleccionar minimo un mes </span> @enderror
+                    @error('listaMes')
+                        <span class="text-red-400 error">Debe seleccionar minimo un mes </span>
+                    @enderror
                     <p>
                     <fieldset class="p-3 border border-gray-200">
                         <legend>Seleccione el Mes</legend>
                         <div class="grid grid-cols-3 gap-3">
                             {{-- @foreach ($config->category as $value) --}}
 
-                            @if(1 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="1" /> Enero</label>
+                            @if (1 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="1" /> Enero</label>
                             @endif
-                            @if(2 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="2" /> Febrero</label>
+                            @if (2 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="2" /> Febrero</label>
                             @endif
-                            @if(3 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="3" /> Marzo</label>
+                            @if (3 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="3" /> Marzo</label>
                             @endif
-                            @if(4 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="4" /> Abril</label>
+                            @if (4 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="4" /> Abril</label>
                             @endif
-                            @if(5 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="5" /> Mayo</label>
+                            @if (5 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="5" /> Mayo</label>
                             @endif
-                            @if(6 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="6" /> Junio</label>
+                            @if (6 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="6" /> Junio</label>
                             @endif
-                            @if(7 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="7" /> Julio</label>
+                            @if (7 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="7" /> Julio</label>
                             @endif
-                            @if(8 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="8" /> Agosto</label>
+                            @if (8 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="8" /> Agosto</label>
                             @endif
-                            @if(9 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="9" /> Septiembre</label>
+                            @if (9 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="9" /> Septiembre</label>
                             @endif
-                            @if(10 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="10" /> Octubre</label>
+                            @if (10 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="10" /> Octubre</label>
                             @endif
-                            @if( 11 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="11" /> Noviembre</label>
+                            @if (11 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="11" /> Noviembre</label>
                             @endif
-                            @if(12 < $mesActual)
-                            <label><input wire:model='listaMes' type="checkbox" value="12" /> Diciembre</label>
+                            @if (12 < $mesActual)
+                                <label><input wire:model='listaMes' type="checkbox" value="12" /> Diciembre</label>
                             @endif
                             {{-- @endforeach --}}
                         </div>
@@ -98,7 +108,9 @@
                 </div>
             @elseif($anio == 2)
                 <div>
-                    @error('listaMes') <span class="text-red-400 error">Debe seleccionar minimo un mes </span> @enderror
+                    @error('listaMes')
+                        <span class="text-red-400 error">Debe seleccionar minimo un mes </span>
+                    @enderror
                     <p>
                     <fieldset class="p-3 border border-gray-200">
                         <legend>Seleccione el Mes</legend>
@@ -148,10 +160,10 @@
                 Descargar Tirilla
             </button>
         </div>
+        <!-- MOdal de spiner -->
+        <div wire:loading.delay.longer wire:target="consultarTirilla" class="relative z-10"
+            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <x-spiner></x-spiner>
+        </div>
     </form>
-    <!-- MOdal de spiner -->
-    <div wire:loading.delay.longer wire:target="consultarTirilla" class="relative z-10" aria-labelledby="modal-title"
-        role="dialog" aria-modal="true">
-        <x-spiner></x-spiner>
-    </div>
 </div>

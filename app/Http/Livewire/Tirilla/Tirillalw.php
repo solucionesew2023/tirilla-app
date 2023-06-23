@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Mail as Mail;
 
 class Tirillalw extends Component
 {
-    public $cedula, $movil, $email, $anio, $alerta=false, $anioSel;
-    Public $listaMes = [];
-    public $mesActual;
+    public $cedula, $movil, $email, $anio, $alerta = false, $anioSel;
+    public $listaMes = [];
+    public $mesActual, $tirilla;
 
     protected $rules = [
         'cedula' => 'required|min:6',
@@ -24,16 +24,18 @@ class Tirillalw extends Component
         'anio' => 'required',
     ];
 
-    public function mount(){
+    public function mount()
+    {
         $this->mesActual = date("m");
     }
 
-    public function updatedanio(){
-        if($this->anio == 1){
+    public function updatedanio()
+    {
+        if ($this->anio == 1) {
             $this->anioSel = date('Y');
-        }elseif($this->anio == 2) {
+        } elseif ($this->anio == 2) {
             $anio = date('Y');
-            $this->anioSel = date("Y",strtotime($anio."- 1 year"));
+            $this->anioSel = date("Y", strtotime($anio . "- 1 year"));
         }
     }
 
@@ -46,32 +48,46 @@ class Tirillalw extends Component
     {
         $this->validate();
 
-        foreach($this->listaMes as $m)
-        {
-            $tirilla = Tirillatns::where('personalid', $this->cedula)
-            ->where('mes',$m)
-            ->where('ano',$this->anioSel)
-            ->get();
+        foreach ($this->listaMes as $m) {
+            $this->tirilla = Tirillatns::where('personalid', $this->cedula)
+                ->where('mes', $m)
+                ->where('ano', $this->anioSel)
+                ->get()->toArray();
 
-            if($tirilla->isEmpty()){
-                return redirect('/')->with('status','Usuario no existe');
-            }else{
+            if (empty($this->tirilla)) {
+                return redirect('/')->with('status', 'Usuario no existe');
+            } else {
+                
+                //$pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
-                $pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
+                $this->download();
                 
                 $details = [
-                // 'mes' => $mes,
-                // 'cedula' => $this->cedula,
-                'title' => 'Consulta Tirilla de pago',
-                'body' => 'Este es un correo automatico. Ver anexo',
+                    // 'mes' => $mes,
+                    // 'cedula' => $this->cedula,
+                    'title' => 'Consulta Tirilla de pago',
+                    'body' => 'Este es un correo automatico. Ver anexo',
                 ];
-                Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
-                $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
-                $mail->to($this->email);
-                $mail->attachData($pdf->output(), $this->cedula.'.pdf');
-                return redirect('/')->with('status','La Tirilla de pago se envió al correo exitosamente');
-                });
+                /*Mail::send('emails/tirillapago', $details, function ($mail) use ($pdf) {
+                    $mail->from('gestiondocumental@prodeho.com.co', 'prodeho');
+                    $mail->to($this->email);
+                    $mail->attachData($pdf->output(), $this->cedula . '.pdf');
+                    return redirect('/')->with('status', 'La Tirilla de pago se envió al correo exitosamente');
+                });*/
             }
         }
-    }// cierra consultarTirilla
+    } // cierra consultarTirilla
+
+
+    public function download()
+    {
+        
+        /*
+        return Pdf::loadView('livewire.tirilla.download', $data)
+            ->setPaper('a4', 'landscape')
+            ->download('archivo.pdf');*/
+            $content = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $this->tirilla])->setPaper('a4', 'landscape')->output();
+
+            Storage::disk('public')->put($this->cedula.'.pdf', $content);
+    }
 }// cierra clase
