@@ -22,11 +22,16 @@ return new class extends Migration
             $table->string('nomconcepto',40);
             $table->smallInteger('conceptoid');
             $table->char('tipodc', 1);
-            $table->smallInteger('cantidad');
+            $table->smallInteger('cantida');
             $table->integer('valor');
             $table->integer('saldo');
             $table->string('tex_adic');
             $table->integer('novedadid');
+            $table->float('basico');
+            $table->date('fec_ingreso');
+            $table->string('cargo');
+            $table->string('seccion');
+            $table->string('area');
             $table->string('nombanco');
             $table->string('ctatrab');
             $table->timestamps();

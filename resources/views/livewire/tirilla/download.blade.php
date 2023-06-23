@@ -42,6 +42,7 @@ $imagenBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($nomb
             .negrita{
                 font-weight: bold;
                 text-transform: uppercase;
+                font-size:12px;
             }
             .footerSintra{
                 background:#fff;
@@ -132,8 +133,8 @@ $imagenBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($nomb
 <body>
     <!-- Defina bloques de encabezado y pie de página antes de su contenido -->
     <header>
-        <strong class="fecha">17-06-2023</strong>
-        <img src="<?php echo $imagenBase64; ?>" width="45%" height="100%" class="img" />
+        <strong class="fecha">@php echo $fecha_actual = date("d-m-Y h:i:s"); @endphp</strong>
+        <img src="<?php echo $imagenBase64; ?>" width="60%" height="100%" class="img" />
     </header>
     <main>
         <h5 class="titulo">
@@ -145,6 +146,12 @@ $imagenBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($nomb
             $cedula = $t["codigo"];
             $banco  = $t["nombanco"];
             $cuenta  = $t["ctatrab"];
+            $basico  = $t["basico"];
+            $fec_ingreso  = $t["fec_ingreso"];
+            $cargo  = $t["cargo"];
+            $seccion  = $t["seccion"];
+            $area  = $t["area"];
+
         @endphp
         @endforeach
         <table >
@@ -163,19 +170,20 @@ $imagenBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($nomb
                     <th class="encabezado">DOCUMENTO:</th>
                     <th class="encabezado">{{$cedula}}</th>
                     <th class="encabezado">CARGO:</th>
-                    <th class="encabezado">12123123</th>
+                    <th class="encabezado">{{$cargo}}</th>
                 </tr>
                 <tr class="encabezado">
                     <th class="encabezado">BASICO:</th>
-                    <th class="encabezado">123</th>
+                    <th class="encabezado">
+        {{number_format($basico,2,".",",")}}</th>
                     <th class="encabezado">SECCION:</th>
-                    <th class="encabezado">12123123</th>
+                    <th class="encabezado">{{$seccion}}</th>
                 </tr>
                 <tr class="encabezado">
                     <th class="encabezado">FECHA INGRESO:</th>
-                    <th class="encabezado">123</th>
+                    <th class="encabezado">{{$fec_ingreso}}</th>
                     <th class="encabezado">AREA:</th>
-                    <th class="encabezado">12123123</th>
+                    <th class="encabezado">{{$area}}</th>
                 </tr>
             
         </table>
@@ -194,18 +202,53 @@ $imagenBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($nomb
             </thead>
 
             <tbody>
+                @php $total1=0;
+                $total2=0;
+                
+                @endphp
                 @foreach ($tirilla as $tir)  
-                <tr>
+                <tr >
                     
                     
-                    <td >{{ $tir["conceptoid"]}}</td>
-                    <td>{{ $tir["nomconcepto"]}}</td>
+                    <td  >{{ $tir["conceptoid"]}}</td>
+                    <td >{{ $tir["nomconcepto"]}}</td>
                     <td>{{ $tir["cantida"]}}</td>
-                    <td>@if($tir["tipodc"]=="D"){{ $tir["valor"]}} @endif</td>
-                    <td>@if($tir["tipodc"]=="C"){{ $tir["valor"]}} @endif</td>
-                    <td>@if($tir["tipodc"]=="C"){{ $tir["saldo"]}} @endif</td>
+                    <td>@if($tir["tipodc"]=="D")
+                        {{number_format( $tir["valor"],2,".",",")}}
+                        @php $total1=$total1+$tir["valor"]; @endphp
+
+                     @endif</td>
+                    <td>@if($tir["tipodc"]=="C"){{number_format( $tir["valor"],2,".",",")}}
+                        @php $total2=$total2+$tir["valor"]; @endphp
+                        @endif</td>
+                    <td>@if($tir["tipodc"]=="C"){{number_format( $tir["saldo"],2,".",",")}} @endif</td>
                 </tr>
                 @endforeach
+                <tr class="negrita">
+                    
+                    
+                    <td ></td>
+                    <td></td>
+                    <td>Totales:</td>
+                    <td>
+                        {{number_format( $total1,2,".",",")}}
+                     </td>
+                    <td>{{number_format( $total2,2,".",",")}}</td>
+                    <td></td>
+                </tr>
+
+                <tr class="negrita">
+                    
+                    
+                    <td ></td>
+                    <td></td>
+                    <td>Neto a pagar:</td>
+                    <td>
+                        
+                     </td>
+                    <td>{{number_format( $total1 - $total2,2,".",",")}}</td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     

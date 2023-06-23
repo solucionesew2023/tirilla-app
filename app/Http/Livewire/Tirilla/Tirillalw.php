@@ -60,7 +60,7 @@ class Tirillalw extends Component
                 
                 //$pdf = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $tirilla]);
 
-                $this->download();
+                $this->download($m);
                 
                 $details = [
                     // 'mes' => $mes,
@@ -79,7 +79,7 @@ class Tirillalw extends Component
     } // cierra consultarTirilla
 
 
-    public function download()
+    public function download($mes)
     {
         
         /*
@@ -88,6 +88,6 @@ class Tirillalw extends Component
             ->download('archivo.pdf');*/
             $content = Pdf::loadView('livewire.tirilla.download', ['tirilla' => $this->tirilla])->setPaper('a4', 'landscape')->output();
 
-            Storage::disk('public')->put($this->cedula.'.pdf', $content);
+            Storage::disk('public')->put($this->cedula.'-'.$mes.'.pdf', $content);
     }
 }// cierra clase
